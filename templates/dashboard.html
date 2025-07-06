@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Your Dashboard - AffordIt{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Your Subscription Dashboard</h1>
+
+    <!-- Stats and Chart -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Total Cost -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-base font-medium text-gray-500">Total Monthly Cost</h3>
+                <p class="mt-1 text-3xl font-semibold text-gray-900">$<span id="total-cost">0.00</span></p>
+            </div>
+            <!-- Total Time Cost -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-base font-medium text-gray-500">Total Monthly Time-Cost</h3>
+                <p class="mt-1 text-3xl font-semibold text-indigo-600" id="total-time-cost">--</p>
+            </div>
+        </div>
+        <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Spending by Category</h3>
+            <div class="h-64 relative">
+                <canvas id="category-chart"></canvas>
+                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 rounded-lg"
+                     id="chart-overlay">
+                    <p class="text-gray-500">Add a subscription to see your spending breakdown.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Subscriptions Section -->
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+        <h2 class="text-xl font-semibold mb-4">My Subscriptions</h2>
+
+        <!-- NEW: Empty State Welcome Panel -->
+        <div class="text-center py-12" id="empty-state-panel">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                <i class="fas fa-stream text-indigo-600 text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-gray-900">Your dashboard is ready</h3>
+            <p class="mt-2 text-sm text-gray-500">Start by adding your current subscriptions to see your financial
+                picture come to life.</p>
+            <div class="mt-6">
+                <button class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" id="add-first-sub-btn"
+                        type="button">
+                    <i class="fas fa-plus -ml-0.5 mr-1.5 h-5 w-5"></i>
+                    Add Your First Subscription
+                </button>
+            </div>
+        </div>
+
+        <!-- Existing Subscription List (now hidden by default if empty) -->
+        <ul class="divide-y divide-gray-200 hidden" id="subscription-list">
+            <!-- JS will populate this list -->
+        </ul>
+    </div>
+
+    <!-- Add New Subscription Form (ID added for scrolling) -->
+    <div class="bg-white p-8 rounded-lg shadow-lg" id="add-subscription-section">
+        <h2 class="text-2xl font-bold mb-6 text-center">Add a New Subscription</h2>
+        <form id="calculator-form">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700" for="service">Subscription Service</label>
+                    <select class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10" id="service"
+                            name="service" required>
+                        <option disabled selected value="">Choose a service...</option>
+                        {% for service in all_services %}
+                        <option value="{{ service.id }}">{{ service.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700" for="plan">Plan</label>
+                    <select class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10" disabled id="plan"
+                            name="plan" required>
+                        <option disabled selected value="">Select a service first</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-6">
+                <button class="w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                        type="submit">
+                    Add to My Dashboard
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Pass data from Django to JavaScript -->
+<script id="user-profile-json" type="application/json">
+    {{
+        user_profile_json
+        |
+        safe
+    }}
+</script>
+<script id="user-subscriptions-json" type="application/json">
+    {{
+        user_subscriptions_json
+        |
+        safe
+    }}
+</script>
+{% endblock %}

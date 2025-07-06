@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Your Settings - AffordIt{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-gray-900 mb-8">Profile & Settings</h1>
+
+        <!-- Success Message -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="mb-6 rounded-md bg-green-50 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-check-circle text-green-400"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800">{{ message }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <form class="space-y-8" method="POST">
+            {% csrf_token %}
+
+            <!-- Personal Information Section -->
+            <div>
+                <h2 class="text-lg font-semibold border-b pb-2 mb-4">Personal Information</h2>
+                <div class="space-y-4">
+                    {% for field in user_form %}
+                    <div>
+                        <label class="block text-sm font-medium leading-6 text-gray-900" for="{{ field.id_for_label }}">{{
+                            field.label }}</label>
+                        <div class="mt-2">
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}{% for error in field.errors %}<p class="mt-2 text-sm text-red-600">{{
+                        error }}</p>{% endfor %}{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Financial Information Section -->
+            <div>
+                <h2 class="text-lg font-semibold border-b pb-2 mb-4">Financial Information</h2>
+                <div class="space-y-4">
+                    {% for field in profile_form %}
+                    <div>
+                        <label class="block text-sm font-medium leading-6 text-gray-900" for="{{ field.id_for_label }}">{{
+                            field.label }}</label>
+                        <div class="mt-2">
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}<p class="mt-2 text-xs text-gray-500">{{ field.help_text|safe }}</p>{%
+                        endif %}
+                        {% if field.errors %}{% for error in field.errors %}<p class="mt-2 text-sm text-red-600">{{
+                        error }}</p>{% endfor %}{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <button class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500"
+                        type="submit">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

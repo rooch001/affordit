@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Log In - AffordIt{% endblock %}
+{% block content %}
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Log in to your account</h2>
+    </div>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form action="{% url 'login' %}" class="space-y-6" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label class="block text-sm font-medium leading-6 text-gray-900" for="{{ field.id_for_label }}">{{
+                    field.label }}</label>
+                <div class="mt-2">
+                    {{ field }}
+                </div>
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+            {% endfor %}
+            {% endif %}
+            <div>
+                <button class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500"
+                        type="submit">
+                    Log In
+                </button>
+            </div>
+        </form>
+        <p class="mt-10 text-center text-sm text-gray-500">
+            Not a member?
+            <a class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" href="{% url 'signup' %}"> Sign up
+                for free</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+django
+python-decouple  # For managing environment variables
+django-jazzmin   # For the admin theme
+requests         # For making HTTP requests in scrapers
+beautifulsoup4   # For parsing HTML

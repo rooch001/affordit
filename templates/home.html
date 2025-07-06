@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}AffordIt - Know The True Cost of Your Subscriptions{% endblock %}
+{% block content %}
+<div class="relative isolate overflow-hidden bg-white">
+    <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+            <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Stop thinking in dollars.
+                Start thinking in time.</h1>
+            <p class="mt-6 text-lg leading-8 text-gray-600">AffordIt translates the abstract cost of subscriptions into
+                your most valuable asset: your time. Understand the true cost of a service by seeing how many hours of
+                your life you trade for it.</p>
+            <div class="mt-10 flex items-center gap-x-6">
+                <a class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                   href="{% url 'signup' %}">Get
+                    started for free</a>
+                <a class="text-sm font-semibold leading-6 text-gray-900" href="#features">Learn more <span
+                        aria-hidden="true">→</span></a>
+            </div>
+        </div>
+        <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mt-0 lg:mr-0 lg:max-w-none lg:flex-none xl:ml-32">
+            <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+                <div class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+                    <img alt="App screenshot" class="w-[76rem] rounded-md shadow-2xl ring-1 ring-gray-900/10"
+                         height="1442" src="https://placehold.co/1200x800/e0e7ff/4f46e5?text=Calculator+UI" width="2432">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray-50 py-24 sm:py-32" id="features">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:text-center">
+            <h2 class="text-base font-semibold leading-7 text-indigo-600">The Real Price Tag</h2>
+            <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A new perspective on your
+                spending</p>
+            <p class="mt-6 text-lg leading-8 text-gray-600">We provide simple, powerful tools to help you make smarter
+                financial decisions without the complexity of traditional budgeting apps.</p>
+        </div>
+        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+            <dl class="grid max-w-none grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
+                <div class="flex flex-col">
+                    <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                        <i class="fas fa-clock h-5 w-5 flex-none text-indigo-600"></i>Time-Cost Calculation
+                    </dt>
+                    <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">Our core feature.
+                        Instantly see how many hours and minutes of work are required to pay for any subscription on our
+                        list.
+                    </dd>
+                </div>
+                <div class="flex flex-col">
+                    <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                        <i class="fas fa-globe-americas h-5 w-5 flex-none text-indigo-600"></i>Global Pricing Database
+                    </dt>
+                    <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">We maintain a vast,
+                        auto-updating database of subscription prices across the US, EU, and Australia, so you get
+                        accurate data.
+                    </dd>
+                </div>
+                <div class="flex flex-col">
+                    <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                        <i class="fas fa-list-alt h-5 w-5 flex-none text-indigo-600"></i>Future: Subscription Tracking
+                    </dt>
+                    <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">Soon, you'll be able to
+                        track all your subscriptions in one place and see your total "time-cost" per month and year.
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}
